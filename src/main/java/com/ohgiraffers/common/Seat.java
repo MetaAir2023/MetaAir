@@ -12,6 +12,7 @@ public class Seat {
     private int sequence;
     private String airlineName;
     private String grade;
+    private String userName;
 
 
 }
