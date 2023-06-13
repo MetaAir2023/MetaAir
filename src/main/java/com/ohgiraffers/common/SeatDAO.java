@@ -19,6 +19,21 @@ public class SeatDAO {
 
     }
 
+    public Seat serch(int sequence){
+        return seatMap.get(sequence);
+    }
+    public void allSearch(){
+        for(int key:seatMap.keySet()){
+
+//        System.out.println(seatMap.get(key));
+        StringBuilder sb=new StringBuilder();
+        sb.append("좌석번호 : ").append(seatMap.get(key).getSequence()).append("  항공사명 : ").append(seatMap.get(key).getAirlineName())
+                .append("  grade : ").append(seatMap.get(key).getGrade()).append("\n");
+        System.out.println((String.valueOf(sb)));
+        }
+    }
+
+
     private boolean validateGrade(String grade, int amount) {
         boolean check = false;
 
@@ -43,6 +58,7 @@ public class SeatDAO {
 
         return seat.getUserName() == userName ;
     }
+
 
 
 }
