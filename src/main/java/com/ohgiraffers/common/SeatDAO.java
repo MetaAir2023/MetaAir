@@ -13,9 +13,9 @@ public class SeatDAO {
     public SeatDAO() {
         this.seatMap = new HashMap<>();
 
-        this.seatMap.put(1, new Seat(1, "airline1", "이코노미"));
-        this.seatMap.put(2, new Seat(2, "airline2", "비즈니스"));
-        this.seatMap.put(3, new Seat(3, "airline3", "퍼스트"));
+        this.seatMap.put(1, new Seat(1, "airline1", "이코노미", null));
+        this.seatMap.put(2, new Seat(2, "airline2", "비즈니스", null));
+        this.seatMap.put(3, new Seat(3, "airline3", "퍼스트", null));
 
     }
 
@@ -32,5 +32,33 @@ public class SeatDAO {
         System.out.println((String.valueOf(sb)));
         }
     }
+
+
+    private boolean validateGrade(String grade, int amount) {
+        boolean check = false;
+
+        switch (grade){
+            case "이코노미": check = amount>5000 ? true : false;
+            case "비즈니스": check = amount>=5000 && amount<10000 ? true : false;
+            case "퍼스트": check = amount>=10000  ? true : false;
+        }
+        return check;
+    }
+    public Seat search(int sequence) { return seatMap.get(sequence); }
+
+    public boolean check(int sequence, int amount, String userName) {
+
+        Seat seat = this.search(sequence);
+        boolean validateGrade = this.validateGrade(seat.getGrade(), amount);
+        if(! validateGrade) {
+            throw new IllegalArgumentException("입력한 금액이 적습니다!!!");
+        }
+        seat.setUserName(userName);
+        System.out.println(seat.toString());
+
+        return seat.getUserName() == userName ;
+    }
+
+
 
 }
